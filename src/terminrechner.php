@@ -32,7 +32,7 @@ class terminrechner
 		return $wochen_nr;
 	}
 	
-	public function CalcWoechentlich($begin_calc,$end_calc,$startdatum,$event_id,$uhrzeit,$tag,$tagesliste) // Tag: 1 (Mo) - 7 (So) - Tagesliste (array): Liste der Tage (z. B. 1,3,5 - leer=wöchentlich)
+	public function CalcEvent($begin_calc,$end_calc,$startdatum,$tag,$tagesliste,$monatsliste) // Tag: 1 (Mo) - 7 (So) - Tages/monatsliste (array): Liste der Tage/monate (z. B. 1,3,5 - leer=wöchentlich/monatlich)
 	{
 		$list=array();
 		
@@ -48,11 +48,9 @@ class terminrechner
 		
 		for($i=$begin_calc;$i<=$end_calc;$i=$i+604800)
 		{
-			if(empty($tagesliste))
+			if(empty($monatsliste) || in_array(date('m',$i),$monatsliste))
 			{
-				array_push($list,$i);
-			} else {
-				if(in_array($this->CalcTagPos($i),$tagesliste))
+				if(empty($tagesliste) || in_array($this->CalcTagPos($i),$tagesliste))
 				{
 					array_push($list,$i);
 				}
@@ -63,7 +61,10 @@ class terminrechner
 }
 
 $t=new terminrechner();
-$buffer=$t->CalcWoechentlich(1391353019,1417186619,1391353019,0,'00:00',5,array(5));
+//$buffer=$t->CalcEvent(1391353019,1417186619,1391353019,5,array(5),array());
+
+$buffer=$t->CalcEvent(1391266619,1420037819,1389970619,5,array(1),array());
+
 foreach($buffer as $event)
 {
 	echo date('d.m.Y',$event).'<br>';
