@@ -63,7 +63,7 @@ class terminrechner
 $t=new terminrechner();
 //$buffer=$t->CalcEvent(1391353019,1417186619,1391353019,5,array(5),array());
 
-$buffer=$t->CalcEvent(1391266619,1420037819,1389970619,5,array(1),array());
+$buffer=$t->CalcEvent(1391266619,1420037819,1389970619,4,array(2),array());
 
 foreach($buffer as $event)
 {
