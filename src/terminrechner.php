@@ -1,6 +1,13 @@
 <?php
 class terminrechner
 {
+	private $db;
+	
+	function __construct()
+	{
+		$this->db=mysql_connect('localhost','programmkalender','programmkalender');
+		mysql_select_db('programmkalender',$this->db);
+	}
 	private function GetTagNr($timestamp)
 	{
 		return date('N',$timestamp);
@@ -57,6 +64,11 @@ class terminrechner
 			}
 		}
 		return $list;
+	}
+	
+	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end,$overwrite)
+	{
+		//
 	}
 }
 ?>
