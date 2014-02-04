@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Erstellungszeit: 03. Feb 2014 um 15:50
+-- Erstellungszeit: 04. Feb 2014 um 09:35
 -- Server Version: 5.5.28-0ubuntu0.12.04.2
 -- PHP-Version: 5.3.10
 
@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `tag` int(11) NOT NULL,
   `tagesliste` varchar(255) NOT NULL,
   `monatsliste` varchar(255) NOT NULL,
+  `startzeit` time NOT NULL,
+  `dauer_std` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -70,11 +72,11 @@ CREATE TABLE IF NOT EXISTS `sendungen` (
 CREATE TABLE IF NOT EXISTS `termine` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `beginn` int(11) NOT NULL,
-  `ende` int(11) NOT NULL,
+  `dauer_std` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -116,7 +116,7 @@ class terminrechner
 		return strtotime("tomorrow", $this->DayBegin($timestamp)) - 1;
 	}
 	
-	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end,$overwrite)
+	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end)
 	{
 		//
 	}
