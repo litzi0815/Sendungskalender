@@ -42,6 +42,8 @@ class terminrechner
 	public function CalcEvent($begin_calc,$end_calc,$startdatum,$tag,$tagesliste,$monatsliste) // Tag: 1 (Mo) - 7 (So) - Tages/monatsliste (array): Liste der Tage/monate (z. B. 1,3,5 - leer=wöchentlich/monatlich)
 	{
 		$list=array();
+		$begin_calc=$this->DayBegin($begin_calc);
+		$end_calc=$this->DayEnd($end_calc);
 		
 		if($begin_calc<$startdatum)
 		{
@@ -121,9 +123,25 @@ class terminrechner
 		return date('Y-m-d',$timestamp);
 	}
 	
-	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end)
+	private function TerminBlacklisted($sendungs_id,$date)
 	{
-		//
+		$sql=mysql_query('SELECT COUNT(*) AS cnt FROM termin_blacklist WHERE sendungs_id='.$sendungs_id.' AND datum="'.$date.'"',$this->db);
+		$row=mysql_fetch_array($sql);
+		if($row['cnt']>0)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function WriteEventToCalendar($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end)
+	{
+		$datumsliste=CalcEvent($calc_beginn,$calc_end,$startdatum,$tag,$tagesliste,$monatsliste);
+		foreach($datumsliste as $datum)
+		{
+			//
+		}
 	}
 }
 ?>
