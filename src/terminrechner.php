@@ -66,7 +66,7 @@ class terminrechner
 		return $list;
 	}
 	
-	public function TerminKollision($beginn,$ende)
+	public function KalenderKollision($beginn,$ende)
 	{
 		$coll=array();
 		$sql=mysql_query('SELECT id FROM termine WHERE '.$beginn.' BETWEEN beginn AND beginn+(dauer_std*3600-1)',$this->db);
@@ -94,6 +94,26 @@ class terminrechner
 		}
 		
 		return array_unique($coll);
+	}
+	
+	private function ListeToArray($liste)
+	{
+		return explode(',',$liste);
+	}
+	
+	private function ArrayToListe($array)
+	{
+		return implode(',',$array);
+	}
+	
+	private function DayBegin($timestamp)
+	{
+		return strtotime("midnight", $timestamp);;
+	}
+	
+	private function DayEnd($timestamp)
+	{
+		return strtotime("tomorrow", $this->DayBegin($timestamp)) - 1;
 	}
 	
 	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end,$overwrite)
