@@ -66,6 +66,36 @@ class terminrechner
 		return $list;
 	}
 	
+	public function TerminKollision($beginn,$ende)
+	{
+		$coll=array();
+		$sql=mysql_query('SELECT id FROM termine WHERE '.$beginn.' BETWEEN beginn AND beginn+(dauer_std*3600-1)',$this->db);
+		while($row=mysql_fetch_array($sql))
+		{
+			array_push($coll,$row['id']);
+		}
+		
+		$sql=mysql_query('SELECT id FROM termine WHERE beginn='.$beginn,$this->db);
+		while($row=mysql_fetch_array($sql))
+		{
+			array_push($coll,$row['id']);
+		}
+		
+		$sql=mysql_query('SELECT id FROM termine WHERE beginn BETWEEN '.$beginn.' AND '.$ende,$this->db);
+		while($row=mysql_fetch_array($sql))
+		{
+			array_push($coll,$row['id']);
+		}
+		
+		$sql=mysql_query('SELECT id FROM termine WHERE beginn+(dauer_std*3600-1) BETWEEN '.$beginn.' AND '.$ende,$this->db);
+		while($row=mysql_fetch_array($sql))
+		{
+			array_push($coll,$row['id']);
+		}
+		
+		return array_unique($coll);
+	}
+	
 	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end,$overwrite)
 	{
 		//
