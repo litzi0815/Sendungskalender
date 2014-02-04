@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Erstellungszeit: 04. Feb 2014 um 09:35
+-- Erstellungszeit: 04. Feb 2014 um 10:07
 -- Server Version: 5.5.28-0ubuntu0.12.04.2
 -- PHP-Version: 5.3.10
 
@@ -77,6 +77,18 @@ CREATE TABLE IF NOT EXISTS `termine` (
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `termin_blacklist`
+--
+
+CREATE TABLE IF NOT EXISTS `termin_blacklist` (
+  `sendungs_id` int(11) NOT NULL,
+  `datum` date NOT NULL,
+  PRIMARY KEY (`sendungs_id`,`datum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -116,6 +116,11 @@ class terminrechner
 		return strtotime("tomorrow", $this->DayBegin($timestamp)) - 1;
 	}
 	
+	private function UnixToDate($timestamp)
+	{
+		return date('Y-m-d',$timestamp);
+	}
+	
 	public function AddEvent($sendung_id,$startdatum,$uhrzeit,$dauer_std,$tag,$tagesliste,$monatsliste,$calc_beginn,$calc_end)
 	{
 		//
